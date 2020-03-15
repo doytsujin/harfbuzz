@@ -6,8 +6,8 @@
  *
  * on files with these headers:
  *
- * <meta name="updated_at" content="2018-11-18 05:25 AM" />
- * File-Date: 2019-04-03
+ * <meta name="updated_at" content="2019-05-22 06:05 PM" />
+ * File-Date: 2019-09-16
  */
 
 #ifndef HB_OT_TAG_TABLE_HH
@@ -803,7 +803,7 @@ static const LangTag ot_languages[] = {
 /*{"rej",	HB_TAG('R','E','J',' ')},*/	/* Rejang */
 /*{"ria",	HB_TAG('R','I','A',' ')},*/	/* Riang (India) */
 /*{"rif",	HB_TAG('R','I','F',' ')},*/	/* Tarifit */
-/*{"rit",	HB_TAG('R','I','T',' ')},*/	/* Ritarungo */
+/*{"rit",	HB_TAG('R','I','T',' ')},*/	/* Ritharrngu -> Ritarungo */
   {"rki",	HB_TAG('A','R','K',' ')},	/* Rakhine */
 /*{"rkw",	HB_TAG('R','K','W',' ')},*/	/* Arakwal */
   {"rm",	HB_TAG('R','M','S',' ')},	/* Romansh */
