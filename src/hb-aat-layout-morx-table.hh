@@ -948,8 +948,8 @@ struct Chain
 	hb_aat_layout_feature_type_t type = (hb_aat_layout_feature_type_t) (unsigned int) feature.featureType;
 	hb_aat_layout_feature_selector_t setting = (hb_aat_layout_feature_selector_t) (unsigned int) feature.featureSetting;
       retry:
-	const hb_aat_map_builder_t::feature_info_t *info = map->features.bsearch (type);
-	if (info && info->setting == setting)
+	const hb_aat_map_builder_t::feature_info_t *info = map->features.bsearch (hb_aat_map_builder_t::feature_info_t { type, setting, false, 0 });
+	if (info)
 	{
 	  flags &= feature.disableFlags;
 	  flags |= feature.enableFlags;

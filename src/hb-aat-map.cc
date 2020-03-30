@@ -48,6 +48,7 @@ void hb_aat_map_builder_t::add_feature (hb_tag_t tag, unsigned value)
     info->type = HB_AAT_LAYOUT_FEATURE_TYPE_CHARACTER_ALTERNATIVES;
     info->setting = (hb_aat_layout_feature_selector_t) value;
     info->seq = features.length;
+    info->is_exclusive = true;
     return;
   }
 
@@ -66,10 +67,18 @@ void hb_aat_map_builder_t::add_feature (hb_tag_t tag, unsigned value)
     else return;
   }
 
+  unsigned int default_index;
+  hb_aat_layout_feature_type_get_selector_infos (face,
+						 mapping->aatFeatureType,
+						 0,
+						 NULL,
+						 NULL,
+						 &default_index);
   feature_info_t *info = features.push();
   info->type = mapping->aatFeatureType;
   info->setting = value ? mapping->selectorToEnable : mapping->selectorToDisable;
   info->seq = features.length;
+  info->is_exclusive = default_index != HB_AAT_LAYOUT_NO_SELECTOR_INDEX;
 }
 
 void
@@ -81,7 +90,7 @@ hb_aat_map_builder_t::compile (hb_aat_map_t  &m)
     features.qsort ();
     unsigned int j = 0;
     for (unsigned int i = 1; i < features.length; i++)
-      if (features[i].type != features[j].type)
+      if (features[i].type != features[j].type || (!features[i].is_exclusive && (features[i].setting ^ features[j].setting) > 1))
 	features[++j] = features[i];
     features.shrink (j + 1);
   }
